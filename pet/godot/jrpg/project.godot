@@ -11,6 +11,9 @@ BattleDirector="*res://BattleDirector.gd"
 WorldMapOverlay="*res://WorldMapOverlay.gd"
 OllamaTermuxBridge="*res://OllamaTermuxBridge.gd"
 
+[editor_plugins]
+enabled=PackedStringArray("res://addons/noko/plugin.cfg")
+
 [display]
 window/size/viewport_width=1280
 window/size/viewport_height=720
