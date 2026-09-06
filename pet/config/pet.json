@@ -1,0 +1,11 @@
+{
+  "name": "Tiny Lum Pet",
+  "version": "0.1.0-cathedral",
+  "host": "127.0.0.1",
+  "port": 8772,
+  "default_state": "idle",
+  "network_default": "off",
+  "external_actions_default": "deny",
+  "moods": ["neutral", "happy", "smug", "jealous", "angry", "sad", "cute"],
+  "events": ["tap", "double_tap", "praise", "message", "ignore", "focus", "jump", "sleep", "wake", "reset"]
+}
