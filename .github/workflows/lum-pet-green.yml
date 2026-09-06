@@ -11,6 +11,7 @@ on:
       - kai9000-s24fe-avatar-cockpit-20260906
       - kai9000-jrpg-dating-cathedral-20260906
       - kai9000-lum-puppet2d-green-20260906
+      - kai9000-ollama-termux-godot4-20260906
     paths:
       - 'pet/**'
       - '.github/workflows/lum-pet-green.yml'
@@ -50,6 +51,8 @@ jobs:
           test -f pet/godot/jrpg/project.godot
           test -f pet/godot/jrpg/Main.tscn
           test -f pet/godot/jrpg/JRPGCockpit.gd
+          test -f pet/godot/jrpg/OllamaTermuxBridge.gd
+          test -f pet/manifests/ollama-termux.reference.json
           test -f pet/godot/jrpg/LumAvatarStage.gd
           test -f pet/godot/jrpg/LumPuppet2D.gd
           test -f pet/godot/jrpg/assets/lum/puppet/lum_puppet.json
@@ -66,6 +69,14 @@ jobs:
           grep -q 'run/main_scene="res://Main.tscn"' pet/godot/jrpg/project.godot
           grep -q 'CathedralDirector="\*res://CathedralDirector.gd"' pet/godot/jrpg/project.godot
           grep -q 'DatingDirector="\*res://DatingDirector.gd"' pet/godot/jrpg/project.godot
+          grep -q 'OllamaTermuxBridge="\*res://OllamaTermuxBridge.gd"' pet/godot/jrpg/project.godot
+          grep -q 'http://127.0.0.1:11434' pet/godot/jrpg/OllamaTermuxBridge.gd
+          grep -q '/api/tags' pet/godot/jrpg/OllamaTermuxBridge.gd
+          grep -q '/api/chat' pet/godot/jrpg/OllamaTermuxBridge.gd
+          grep -q 'qwen2.5:0.5b' pet/godot/jrpg/OllamaTermuxBridge.gd
+          grep -q 'DioNanos/ollama-termux' pet/manifests/ollama-termux.reference.json
+          grep -q '39d8bc2c7b123293703fbead08198c9efa9187b5' pet/manifests/ollama-termux.reference.json
+          grep -q 'eol_archived' pet/manifests/ollama-termux.reference.json
           grep -q 'http://127.0.0.1:8772' pet/godot/jrpg/JRPGCockpit.gd
           grep -q 'ACODEX // COMMAND MENU' pet/godot/jrpg/JRPGCockpit.gd
           grep -q 'res://assets/lum/lum.glb' pet/godot/jrpg/LumAvatarStage.gd
@@ -76,6 +87,7 @@ jobs:
           grep -q 'reference-only' pet/godot/jrpg/assets/lum/puppet/lum_puppet.json
           grep -q 'AudioStreamWAV' pet/godot/jrpg/OriginalFanfare.gd
           grep -q 'architectures/arm64-v8a=true' pet/godot/jrpg/export_presets.cfg
+          grep -q 'permissions/internet=true' pet/godot/jrpg/export_presets.cfg
           ! find pet/godot/jrpg/assets/lum/puppet -type f | grep -Ei '\.(pck|moc|mtn|moc3)$'
           ! grep -R -nE '0\.0\.0\.0|:22\b|OS\.execute|Process|Runtime\.exec' pet/godot/jrpg
 
