@@ -53,6 +53,16 @@ jobs:
           test -f pet/godot/jrpg/JRPGCockpit.gd
           test -f pet/godot/jrpg/OllamaTermuxBridge.gd
           test -f pet/manifests/ollama-termux.reference.json
+          test -f pet/manifests/noko.reference.json
+          test -f pet/godot/jrpg/addons/noko/LICENSE
+          test -f pet/godot/jrpg/addons/noko/plugin.cfg
+          test -f pet/godot/jrpg/addons/noko/plugin.gd
+          test -f pet/godot/jrpg/addons/noko/modules/NokoPrompt.gd
+          test -f pet/godot/jrpg/addons/noko/modules/NokoModel.gd
+          test -f pet/godot/jrpg/addons/noko/modules/NokoRunner.gd
+          test -f pet/godot/jrpg/addons/noko/modules/NokoBlobs.gd
+          test -f pet/godot/jrpg/addons/noko/modules/utils/NetUtils.gd
+          test -f pet/godot/jrpg/addons/noko/modules/utils/ValidatorUtils.gd
           test -f pet/godot/jrpg/LumAvatarStage.gd
           test -f pet/godot/jrpg/LumPuppet2D.gd
           test -f pet/godot/jrpg/assets/lum/puppet/lum_puppet.json
@@ -70,6 +80,9 @@ jobs:
           grep -q 'CathedralDirector="\*res://CathedralDirector.gd"' pet/godot/jrpg/project.godot
           grep -q 'DatingDirector="\*res://DatingDirector.gd"' pet/godot/jrpg/project.godot
           grep -q 'OllamaTermuxBridge="\*res://OllamaTermuxBridge.gd"' pet/godot/jrpg/project.godot
+          grep -q 'res://addons/noko/plugin.cfg' pet/godot/jrpg/project.godot
+          grep -q 'NokoPromptAPI' pet/godot/jrpg/OllamaTermuxBridge.gd
+          grep -q 'NokoModelAPI' pet/godot/jrpg/OllamaTermuxBridge.gd
           grep -q 'http://127.0.0.1:11434' pet/godot/jrpg/OllamaTermuxBridge.gd
           grep -q '/api/tags' pet/godot/jrpg/OllamaTermuxBridge.gd
           grep -q '/api/chat' pet/godot/jrpg/OllamaTermuxBridge.gd
@@ -77,6 +90,10 @@ jobs:
           grep -q 'DioNanos/ollama-termux' pet/manifests/ollama-termux.reference.json
           grep -q '39d8bc2c7b123293703fbead08198c9efa9187b5' pet/manifests/ollama-termux.reference.json
           grep -q 'eol_archived' pet/manifests/ollama-termux.reference.json
+          grep -q 'nthnn/noko' pet/manifests/noko.reference.json
+          grep -q 'a45373a5d28f7f8b5da1ec97eac65da95963e34e' pet/manifests/noko.reference.json
+          grep -q 'Copyright 2025 Nathanne Isip' pet/godot/jrpg/addons/noko/LICENSE
+          grep -q 'name="Noko"' pet/godot/jrpg/addons/noko/plugin.cfg
           grep -q 'http://127.0.0.1:8772' pet/godot/jrpg/JRPGCockpit.gd
           grep -q 'ACODEX // COMMAND MENU' pet/godot/jrpg/JRPGCockpit.gd
           grep -q 'res://assets/lum/lum.glb' pet/godot/jrpg/LumAvatarStage.gd
