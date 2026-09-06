@@ -10,6 +10,7 @@ on:
       - lum-pet-cathedral-20260906
       - kai9000-s24fe-avatar-cockpit-20260906
       - kai9000-jrpg-dating-cathedral-20260906
+      - kai9000-lum-puppet2d-green-20260906
     paths:
       - 'pet/**'
       - '.github/workflows/lum-pet-green.yml'
@@ -50,6 +51,8 @@ jobs:
           test -f pet/godot/jrpg/Main.tscn
           test -f pet/godot/jrpg/JRPGCockpit.gd
           test -f pet/godot/jrpg/LumAvatarStage.gd
+          test -f pet/godot/jrpg/LumPuppet2D.gd
+          test -f pet/godot/jrpg/assets/lum/puppet/lum_puppet.json
           test -f pet/godot/jrpg/OriginalFanfare.gd
           test -f pet/godot/jrpg/export_presets.cfg
           test -f pet/godot/jrpg/CathedralDirector.gd
@@ -66,8 +69,14 @@ jobs:
           grep -q 'http://127.0.0.1:8772' pet/godot/jrpg/JRPGCockpit.gd
           grep -q 'ACODEX // COMMAND MENU' pet/godot/jrpg/JRPGCockpit.gd
           grep -q 'res://assets/lum/lum.glb' pet/godot/jrpg/LumAvatarStage.gd
+          grep -q '_try_load_puppet2d' pet/godot/jrpg/LumAvatarStage.gd
+          grep -q 'body_sway' pet/godot/jrpg/LumPuppet2D.gd
+          grep -q 'eye_open' pet/godot/jrpg/LumPuppet2D.gd
+          grep -q 'wing_open' pet/godot/jrpg/LumPuppet2D.gd
+          grep -q 'reference-only' pet/godot/jrpg/assets/lum/puppet/lum_puppet.json
           grep -q 'AudioStreamWAV' pet/godot/jrpg/OriginalFanfare.gd
           grep -q 'architectures/arm64-v8a=true' pet/godot/jrpg/export_presets.cfg
+          ! find pet/godot/jrpg/assets/lum/puppet -type f | grep -Ei '\.(pck|moc|mtn|moc3)$'
           ! grep -R -nE '0\.0\.0\.0|:22\b|OS\.execute|Process|Runtime\.exec' pet/godot/jrpg
 
       - name: Run sprite QA baseline
@@ -82,5 +91,5 @@ jobs:
         working-directory: pet
         run: python scripts/cathedral_content_gate.py
 
-      - name: Run runtime, RPG, quest, save, and HTTP tests
+      - name: Run runtime, RPG, quest, save, puppet, and HTTP tests
         run: PYTHONPATH=pet python -m unittest discover -s pet/tests -v
