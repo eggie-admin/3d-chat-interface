@@ -3,6 +3,12 @@ config/name="KAI 9000 JRPG Cockpit"
 run/main_scene="res://Main.tscn"
 config/features=PackedStringArray("4.7", "Mobile")
 
+[autoload]
+CathedralDirector="*res://CathedralDirector.gd"
+DatingDirector="*res://DatingDirector.gd"
+RoleplayDirector="*res://RoleplayDirector.gd"
+BattleDirector="*res://BattleDirector.gd"
+
 [display]
 window/size/viewport_width=1280
 window/size/viewport_height=720
