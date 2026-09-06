@@ -1,0 +1,39 @@
+{
+  "schema": "kai9000.upstream-reference.v1",
+  "name": "DioNanos/ollama-termux",
+  "kind": "android_arm64_local_llm_runtime",
+  "repository": "https://github.com/DioNanos/ollama-termux",
+  "ref": "39d8bc2c7b123293703fbead08198c9efa9187b5",
+  "release_line": "0.33.1-termux",
+  "license": "MIT",
+  "lifecycle": "eol_archived",
+  "integration_mode": "reference_only_no_vendored_source",
+  "runtime_contract": {
+    "host": "127.0.0.1",
+    "port": 11434,
+    "base_url": "http://127.0.0.1:11434",
+    "transport": "ollama_http_api",
+    "public_exposure": false,
+    "remote_shell": false
+  },
+  "godot4": {
+    "bridge": "res://OllamaTermuxBridge.gd",
+    "default_model": "qwen2.5:0.5b",
+    "director_model_hint": "qwen2.5:3b",
+    "streaming": false,
+    "credentials_required": false
+  },
+  "adopted_patterns": [
+    "termux_first_android_arm64_runtime",
+    "mobile_memory_budgeting",
+    "mobile_thread_budgeting",
+    "android_system_vulkan_loader_preference",
+    "sha256_verified_release_assets"
+  ],
+  "non_goals": [
+    "copying_upstream_source_into_godot",
+    "automatic_install_of_eol_packages",
+    "binding_godot_to_arbitrary_shell_execution",
+    "public_network_exposure_of_ollama"
+  ]
+}
