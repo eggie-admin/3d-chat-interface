@@ -1,0 +1,51 @@
+name: Lum Pet Green Gate
+
+on:
+  pull_request:
+    paths:
+      - 'pet/**'
+      - '.github/workflows/lum-pet-green.yml'
+  push:
+    branches:
+      - lum-pet-cathedral-20260906
+    paths:
+      - 'pet/**'
+      - '.github/workflows/lum-pet-green.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  green:
+    name: Python ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.11', '3.12', '3.13']
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Compile Python
+        run: python -m compileall -q pet
+
+      - name: Validate Termux launcher
+        run: bash -n pet/run-termux.sh
+
+      - name: Run sprite QA baseline
+        working-directory: pet
+        run: python scripts/qa_pet_atlas.py
+
+      - name: Run Cathedral green gate
+        working-directory: pet
+        run: python scripts/green_gate.py
+
+      - name: Run runtime and HTTP tests
+        run: python -m unittest discover -s pet/tests -v
