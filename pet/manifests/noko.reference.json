@@ -15,6 +15,11 @@
     "provider_credentials_in_godot": false,
     "arbitrary_shell": false
   },
+  "provenance": {
+    "plugin_metadata": "upstream",
+    "license": "upstream verbatim",
+    "runtime_modules": "derived from pinned upstream and modified under MIT"
+  },
   "mutations": [
     "preserve upstream MIT attribution",
     "use application/json for Ollama JSON payloads",
