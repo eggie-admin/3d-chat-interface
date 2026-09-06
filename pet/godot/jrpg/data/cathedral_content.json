@@ -1,0 +1,46 @@
+{
+  "project": "KAI 9000 Cathedral JRPG",
+  "design_note": "Original pilgrimage-fantasy JRPG and dating-sim structure inspired by late-90s/early-2000s console RPG pacing, without copying Final Fantasy characters, names, music, maps, or story assets.",
+  "world": {
+    "regions": [
+      {"id":"glass_coast","name":"Glass Coast","theme":"sunlit ruins, salt wind, machine relics","level_band":[1,6],"hub":"Brinewake"},
+      {"id":"blue_steppe","name":"Blue Steppe","theme":"high grass, shrine roads, storm pylons","level_band":[5,12],"hub":"Vesper Camp"},
+      {"id":"ashen_canals","name":"Ashen Canals","theme":"industrial waterways, black iron bridges, neon chapels","level_band":[10,18],"hub":"Cinder Parish"},
+      {"id":"starfall_range","name":"Starfall Range","theme":"snow temples, observatories, ancient signal towers","level_band":[16,26],"hub":"Choir Summit"},
+      {"id":"cathedral_of_static","name":"Cathedral of Static","theme":"final pilgrimage complex, blue-white machinery and ritual space","level_band":[24,40],"hub":"The Nave"}
+    ]
+  },
+  "npcs": [
+    {"id":"lum","name":"Lum","role":"infernal secretary / party tactician","romance":true,"route":"rival_to_confidante","combat":"caster_support","animation_profile":"lum"},
+    {"id":"mara_voss","name":"Mara Voss","role":"salvage knight","romance":true,"route":"guarded_slow_burn","combat":"tank","animation_profile":"humanoid_heavy"},
+    {"id":"nyx_arden","name":"Nyx Arden","role":"signal witch","romance":true,"route":"chaotic_intellectual","combat":"debuffer","animation_profile":"humanoid_caster"},
+    {"id":"orion_finch","name":"Orion Finch","role":"cartographer and cook","romance":false,"combat":"healer","animation_profile":"humanoid_light"},
+    {"id":"abbot_zero","name":"Abbot Zero","role":"cathedral archivist","romance":false,"combat":"none","animation_profile":"elder"}
+  ],
+  "monsters": [
+    {"id":"wire_imp","name":"Wire Imp","family":"daemon","region":"glass_coast","behavior":"skirmisher","drops":["copper_rune","static_gel"]},
+    {"id":"salt_wyrm","name":"Salt Wyrm","family":"beast","region":"glass_coast","behavior":"burrow_charge","drops":["white_scale","brine_core"]},
+    {"id":"choir_hound","name":"Choir Hound","family":"construct","region":"blue_steppe","behavior":"pack_hunter","drops":["tone_shard","servo_bone"]},
+    {"id":"canal_revenant","name":"Canal Revenant","family":"undead_machine","region":"ashen_canals","behavior":"drain_counter","drops":["black_coil","memory_salt"]},
+    {"id":"aurora_seraph","name":"Aurora Seraph","family":"ritual_construct","region":"starfall_range","behavior":"barrier_burst","drops":["prism_feather","star_capacitor"]},
+    {"id":"static_colossus","name":"Static Colossus","family":"boss","region":"cathedral_of_static","behavior":"phase_boss","drops":["cathedral_key"]}
+  ],
+  "dating_sim": {
+    "stats":["trust","spark","respect","jealousy"],
+    "range":[0,100],
+    "beats":["camp_banter","quest_confession","rival_choice","quiet_scene","route_lock","ending_scene"],
+    "rule":"No relationship state can block core progression; romance is additive, optional, and reversible before route lock."
+  },
+  "combat": {
+    "style":"turn_based_party",
+    "party_size":4,
+    "commands":["attack","skill","guard","item","bond","escape"],
+    "bond_command":"Contextual duo action unlocked by relationship and quest state, using original animations and effects."
+  },
+  "community_assets": [
+    {"id":"quaternius_ultimate_rpg","creator":"Quaternius","license":"CC0-1.0","use":"3D NPC/monster/environment placeholders","source":"https://quaternius.com/packs/ultimaterpg.html"},
+    {"id":"quaternius_universal_animation_library","creator":"Quaternius","license":"CC0-1.0","use":"retargetable locomotion/combat/emotes","source":"https://store.godotengine.org/asset/quaternius/universal-animation-library/"},
+    {"id":"kenney_mini_dungeon","creator":"Kenney","license":"CC0-1.0","use":"dungeon blockout and collision-ready props","source":"https://kenney-assets.itch.io/mini-dungeon"},
+    {"id":"gdquest_open_rpg","creator":"GDQuest","license":"MIT","use":"architecture reference for Godot 4 turn-based RPG systems; do not vendor blindly","source":"https://github.com/gdquest-demos/godot-open-rpg"}
+  ]
+}
