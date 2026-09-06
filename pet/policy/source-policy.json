@@ -1,0 +1,26 @@
+{
+  "default": "reference_only",
+  "lanes": {
+    "legacy_external": {
+      "redistributable": false,
+      "copy_into_release": false,
+      "purpose": "analysis/reference only"
+    },
+    "lum_original": {
+      "redistributable": true,
+      "copy_into_release": true,
+      "purpose": "runtime"
+    },
+    "generated_original": {
+      "redistributable": true,
+      "copy_into_release": true,
+      "purpose": "runtime with provenance"
+    },
+    "unknown": {
+      "redistributable": false,
+      "copy_into_release": false,
+      "purpose": "quarantine until reviewed"
+    }
+  },
+  "rule": "Third-party sources may be indexed and studied, but release builds include only assets explicitly marked approved."
+}

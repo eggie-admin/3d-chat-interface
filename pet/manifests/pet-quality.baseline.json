@@ -1,0 +1,27 @@
+{
+  "ok": true,
+  "atlas": "/workspace/scratch/e44f7c767fba/tiny-lum-pet/final/spritesheet-extended.png",
+  "encoded_bytes": 2197615,
+  "sha256": "4b0c74ea97eb029254c8f5d2dd510f70977fc08625fa8f655b988cf8d923d7fc",
+  "jump": {
+    "idle_baseline": 202,
+    "jump_baselines": [202, 180, 158, 186, 202],
+    "airborne_lift_pixels": 44,
+    "landing_delta_pixels": 0
+  },
+  "look_registration": {
+    "neutral_center_x": 96.0,
+    "look_centers_x": [97.0, 96.5, 96.5, 96.5, 97.0, 96.5, 96.5, 97.0, 98.0, 96.5, 97.0, 96.5, 99.0, 99.0, 99.0, 99.0],
+    "look_widths": [88, 87, 87, 87, 88, 87, 87, 86, 80, 81, 82, 83, 80, 80, 80, 80],
+    "maximum_center_drift_pixels": 3.0,
+    "maximum_width_ratio": 1.1
+  },
+  "errors": [],
+  "warnings": [
+    "157.5->180 diff is a local outlier (2677 pixels vs neighbor average 1166)",
+    "247.5->270 diff is a local outlier (2258 pixels vs neighbor average 1062)",
+    "337.5->000 diff is a local outlier (3626 pixels vs neighbor average 1230)",
+    "337.5->000 center shift is high (9.7px)",
+    "337.5->000 sprite area ratio is high (1.21)"
+  ]
+}
