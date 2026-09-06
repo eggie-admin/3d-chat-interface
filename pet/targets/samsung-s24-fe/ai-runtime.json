@@ -1,0 +1,28 @@
+{
+  "schema": "kai9000.samsung.ai-runtime.v1",
+  "device_model": "SM-S721U1",
+  "android_major": 16,
+  "runtime_owner": "ordinary-termux",
+  "secure_folder_role": "client-only",
+  "ai_feed_api": {
+    "base_url": "http://127.0.0.1:8797/api/ai",
+    "transport": "loopback-http",
+    "credentials": false,
+    "physical_secure_folder_probe_required": true
+  },
+  "existing_services_preserved": {
+    "vnc": 5901,
+    "websocket": 6080,
+    "acodex": 8767,
+    "jrpg_pet": 8772,
+    "antenna_ai": 8797,
+    "ollama": 11434
+  },
+  "security": {
+    "public_listeners": false,
+    "cross_knox_pid_control": false,
+    "arbitrary_shell_endpoint": false,
+    "model_adb_execution": false,
+    "model_shizuku_execution": false
+  }
+}
