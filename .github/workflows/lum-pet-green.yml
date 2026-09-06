@@ -8,6 +8,7 @@ on:
   push:
     branches:
       - lum-pet-cathedral-20260906
+      - kai9000-s24fe-avatar-cockpit-20260906
     paths:
       - 'pet/**'
       - '.github/workflows/lum-pet-green.yml'
@@ -36,18 +37,26 @@ jobs:
       - name: Compile Python
         run: python -m compileall -q pet
 
-      - name: Validate Termux launchers
+      - name: Validate Termux and Android launchers
         run: |
           bash -n pet/run-termux.sh
           bash -n pet/kai-jrpg-supervisor.sh
+          bash -n pet/godot/jrpg/build-s24fe.sh
 
       - name: Validate JRPG Godot project shell
         run: |
           test -f pet/godot/jrpg/project.godot
           test -f pet/godot/jrpg/Main.tscn
           test -f pet/godot/jrpg/JRPGCockpit.gd
+          test -f pet/godot/jrpg/LumAvatarStage.gd
+          test -f pet/godot/jrpg/OriginalFanfare.gd
+          test -f pet/godot/jrpg/export_presets.cfg
           grep -q 'run/main_scene="res://Main.tscn"' pet/godot/jrpg/project.godot
           grep -q 'http://127.0.0.1:8772' pet/godot/jrpg/JRPGCockpit.gd
+          grep -q 'ACODEX // COMMAND MENU' pet/godot/jrpg/JRPGCockpit.gd
+          grep -q 'res://assets/lum/lum.glb' pet/godot/jrpg/LumAvatarStage.gd
+          grep -q 'AudioStreamWAV' pet/godot/jrpg/OriginalFanfare.gd
+          grep -q 'architectures/arm64-v8a=true' pet/godot/jrpg/export_presets.cfg
           ! grep -R -nE '0\.0\.0\.0|:22\b|OS\.execute|Process|Runtime\.exec' pet/godot/jrpg
 
       - name: Run sprite QA baseline
@@ -58,5 +67,5 @@ jobs:
         working-directory: pet
         run: python scripts/green_gate.py
 
-      - name: Run runtime, RPG, and HTTP tests
+      - name: Run runtime, RPG, quest, save, and HTTP tests
         run: PYTHONPATH=pet python -m unittest discover -s pet/tests -v
