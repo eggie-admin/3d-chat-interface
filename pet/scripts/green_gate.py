@@ -16,6 +16,13 @@ def load_json(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def require_text(path: Path, errors: list[str]) -> str:
+    if not path.exists():
+        errors.append(f"missing required file: {path.relative_to(ROOT)}")
+        return ""
+    return path.read_text(encoding="utf-8")
+
+
 def main() -> int:
     errors: list[str] = []
     checks: list[str] = []
@@ -80,7 +87,13 @@ def main() -> int:
     if not any(e.startswith("Samsung S24 FE") or "Secure Folder" in e or "Knox" in e or "shell endpoint" in e for e in errors):
         checks.append("Samsung S24 FE target contract")
 
-    for source in (ROOT / "runtime.py", ROOT / "server.py", ROOT / "roleplay.py"):
+    for source in (
+        ROOT / "runtime.py",
+        ROOT / "server.py",
+        ROOT / "roleplay.py",
+        ROOT / "quests.py",
+        ROOT / "saves.py",
+    ):
         try:
             py_compile.compile(str(source), doraise=True)
         except py_compile.PyCompileError as exc:
@@ -88,9 +101,47 @@ def main() -> int:
     if not any("SyntaxError" in e for e in errors):
         checks.append("python compile")
 
+    godot_root = ROOT / "godot" / "jrpg"
+    cockpit = require_text(godot_root / "JRPGCockpit.gd", errors)
+    avatar = require_text(godot_root / "LumAvatarStage.gd", errors)
+    fanfare = require_text(godot_root / "OriginalFanfare.gd", errors)
+    export_preset = require_text(godot_root / "export_presets.cfg", errors)
+    build_script = require_text(godot_root / "build-s24fe.sh", errors)
+
+    if "http://127.0.0.1:8767" not in cockpit or "ACODEX // COMMAND MENU" not in cockpit:
+        errors.append("AcodeX localhost command pane missing")
+    if "OS.execute" in cockpit or "execute_with_pipe" in cockpit:
+        errors.append("Godot cockpit must not expose arbitrary OS command execution")
+    if "DENIED: not in KAI command whitelist" not in cockpit:
+        errors.append("Godot command whitelist guard missing")
+    if not errors:
+        checks.append("AcodeX safe command pane")
+
+    if "res://assets/lum/lum.glb" not in avatar or "_build_procedural_lum" not in avatar:
+        errors.append("Lum avatar must provide GLB hook and procedural fallback")
+    if "small" in avatar.lower() and False:
+        errors.append("unreachable")
+    if "hip" not in avatar.lower() or "wing" not in avatar.lower():
+        errors.append("Lum procedural avatar must retain hip-wing construction")
+    if "AudioStreamWAV" not in fanfare or "play_victory" not in fanfare:
+        errors.append("original procedural fanfare generator missing")
+    if not any("Lum avatar" in e or "fanfare" in e for e in errors):
+        checks.append("Lum avatar and original fanfare")
+
+    if 'name="Samsung S24 FE"' not in export_preset:
+        errors.append("Samsung Android export preset missing")
+    if "architectures/arm64-v8a=true" not in export_preset:
+        errors.append("Samsung export must enable arm64-v8a")
+    if 'package/unique_name="art.eggiebagelface.kai9000"' not in export_preset:
+        errors.append("Samsung package id drifted")
+    if "--export-debug \"Samsung S24 FE\"" not in build_script:
+        errors.append("S24 FE export helper does not invoke canonical preset")
+    if not any("export" in e.lower() or "package" in e.lower() or "arm64" in e.lower() for e in errors):
+        checks.append("Samsung Android export contract")
+
     result = {
         "ok": not errors,
-        "seal": "KAI9000_S24FE_JRPG_COCKPIT_GREEN_20260906",
+        "seal": "KAI9000_S24FE_AVATAR_COCKPIT_GREEN_20260906",
         "checks": checks,
         "errors": errors,
         "warnings": quality.get("warnings", []),
