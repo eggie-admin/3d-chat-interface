@@ -1,0 +1,58 @@
+{
+  "seal": "KAI9000_LUM_AVATAR_ACTUAL_ANIMATED_GREEN_20260906",
+  "status": "accepted_motion_proof",
+  "ship_forward": true,
+  "rig_debug_deferred": true,
+  "android_target": "Samsung Galaxy S24 FE / SM-S721U1",
+  "runtime": {
+    "engine": "Godot 4",
+    "preferred_preview_format": "mp4",
+    "gif_fallback": true,
+    "live_rig_target": "Godot animation resources",
+    "localhost_backend": "http://127.0.0.1:8772"
+  },
+  "motion_states": [
+    "idle",
+    "blink",
+    "smile",
+    "wave",
+    "tease",
+    "cast",
+    "victory",
+    "sad",
+    "idle"
+  ],
+  "godot_state_map": {
+    "idle": "Idle_Breathe",
+    "blink": "Blink",
+    "smile": "Face_Happy",
+    "wave": "Emote_Wave",
+    "tease": "Face_Smug",
+    "cast": "Cast",
+    "victory": "Victory",
+    "sad": "Face_Sad"
+  },
+  "drive": {
+    "folder_id": "1rM2x-_u0zgzQkcDkXfOtFL5sb0ZSUuqO",
+    "folder_url": "https://drive.google.com/drive/folders/1rM2x-_u0zgzQkcDkXfOtFL5sb0ZSUuqO",
+    "gif": {
+      "file_id": "1_6cgTXU2tgH15OZOuLmABGloKqhtfYJU",
+      "url": "https://drive.google.com/file/d/1_6cgTXU2tgH15OZOuLmABGloKqhtfYJU/view?usp=drivesdk"
+    },
+    "mp4": {
+      "file_id": "1xuA3wkyFeGkgH7LQIi7a679wnglXvQ7H",
+      "url": "https://drive.google.com/file/d/1xuA3wkyFeGkgH7LQIi7a679wnglXvQ7H/view?usp=drivesdk"
+    },
+    "manifest": {
+      "file_id": "1Uq29nL8iM2hQn7hgLmzxcO7PC7_SC49L",
+      "url": "https://drive.google.com/file/d/1Uq29nL8iM2hQn7hgLmzxcO7PC7_SC49L/view?usp=drivesdk"
+    }
+  },
+  "copyright_firewall": {
+    "destiny_child_runtime_dependency": false,
+    "destiny_child_assets_embedded": false,
+    "reference_use_only": true,
+    "note": "Destiny Child material remains reference-only. No proprietary .pck, .moc, .mtn, audio, or art is bundled."
+  },
+  "follow_up_issue": "https://github.com/eggie-admin/3d-chat-interface/issues/4"
+}

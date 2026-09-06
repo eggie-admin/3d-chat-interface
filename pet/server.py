@@ -24,6 +24,7 @@ ROOT = Path(__file__).resolve().parent
 CFG = json.loads((ROOT / "config" / "pet.json").read_text(encoding="utf-8"))
 WEB = ROOT / "web"
 MANIFEST = ROOT / "manifests" / "lumSpriteAtlas.schema.json"
+AVATAR_MANIFEST = ROOT / "manifests" / "lum-avatar-live.json"
 MAX_BODY = 16 * 1024
 LOCAL_SERVICES = {
     "vnc": 5901,
@@ -42,7 +43,7 @@ def _port_open(port: int, timeout: float = 0.15) -> bool:
 
 
 class Handler(BaseHTTPRequestHandler):
-    server_version = "TinyLumPet/0.3"
+    server_version = "TinyLumPet/0.4"
 
     def _json(self, code: int, payload: dict) -> None:
         body = json.dumps(payload, indent=2).encode("utf-8")
@@ -82,6 +83,11 @@ class Handler(BaseHTTPRequestHandler):
             return self._json(200, asdict(load_quest_state()))
         if path == "/api/saves":
             return self._json(200, {"slots": list_slots()})
+        if path == "/api/avatar/status":
+            if not AVATAR_MANIFEST.exists():
+                return self._json(503, {"ok": False, "error": "avatar manifest missing"})
+            payload = json.loads(AVATAR_MANIFEST.read_text(encoding="utf-8"))
+            return self._json(200, {"ok": True, "avatar": payload})
         if path == "/api/acodex/status":
             up = _port_open(LOCAL_SERVICES["acodex"])
             return self._json(200, {

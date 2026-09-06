@@ -68,6 +68,16 @@ class PetServerTests(unittest.TestCase):
         self.assertIn("animations", manifest)
         self.assertIn("idle", manifest["animations"])
 
+    def test_avatar_status_is_shippable(self) -> None:
+        status, payload = self.get_json("/api/avatar/status")
+        self.assertEqual(status, 200)
+        self.assertTrue(payload["ok"])
+        avatar = payload["avatar"]
+        self.assertTrue(avatar["ship_forward"])
+        self.assertTrue(avatar["rig_debug_deferred"])
+        self.assertEqual(avatar["runtime"]["preferred_preview_format"], "mp4")
+        self.assertFalse(avatar["copyright_firewall"]["destiny_child_assets_embedded"])
+
     def test_unknown_event_returns_400(self) -> None:
         request = Request(
             self.base + "/api/pet/event",
