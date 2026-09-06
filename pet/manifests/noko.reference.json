@@ -13,7 +13,8 @@
     "ollama_endpoint": "http://127.0.0.1:11434",
     "runtime_adapter": "res://OllamaTermuxBridge.gd",
     "provider_credentials_in_godot": false,
-    "arbitrary_shell": false
+    "arbitrary_shell": false,
+    "savepoint": "KAI9000_NOKO_GODOT4_INGEST_20260906"
   },
   "provenance": {
     "plugin_metadata": "upstream",
