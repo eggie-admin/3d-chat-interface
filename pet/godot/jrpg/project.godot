@@ -8,6 +8,7 @@ CathedralDirector="*res://CathedralDirector.gd"
 DatingDirector="*res://DatingDirector.gd"
 RoleplayDirector="*res://RoleplayDirector.gd"
 BattleDirector="*res://BattleDirector.gd"
+WorldMapOverlay="*res://WorldMapOverlay.gd"
 
 [display]
 window/size/viewport_width=1280
