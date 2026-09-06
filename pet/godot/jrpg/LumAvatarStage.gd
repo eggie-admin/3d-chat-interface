@@ -2,10 +2,13 @@ extends SubViewportContainer
 
 const GLB_PATH := "res://assets/lum/lum.glb"
 const SPRITE_PATH := "res://assets/lum/lumSpriteAtlas.clean.png"
+const PUPPET_SCRIPT := preload("res://LumPuppet2D.gd")
 
 var _viewport: SubViewport
 var _world_root: Node3D
 var _avatar: Node3D
+var _puppet: Node2D
+var _avatar_mode := "none"
 var _time := 0.0
 var _mood := "neutral"
 var _base_y := 0.0
@@ -19,10 +22,35 @@ func _ready() -> void:
     _viewport.transparent_bg = false
     add_child(_viewport)
 
+    if _try_load_puppet2d():
+        return
+
     _world_root = Node3D.new()
     _viewport.add_child(_world_root)
     _build_world()
     _load_lum()
+
+
+func _try_load_puppet2d() -> bool:
+    var puppet = PUPPET_SCRIPT.new()
+    if not puppet.configure():
+        puppet.queue_free()
+        return false
+
+    var backdrop := ColorRect.new()
+    backdrop.color = Color("080b14")
+    backdrop.position = Vector2.ZERO
+    backdrop.size = Vector2(720, 400)
+    backdrop.mouse_filter = Control.MOUSE_FILTER_IGNORE
+    _viewport.add_child(backdrop)
+
+    _puppet = puppet
+    _viewport.add_child(_puppet)
+    _puppet.position = puppet.stage_origin()
+    _puppet.scale = Vector2.ONE * puppet.stage_scale()
+    _avatar_mode = "puppet2d"
+    _puppet.set_mood(_mood)
+    return true
 
 
 func _build_world() -> void:
@@ -86,10 +114,12 @@ func _load_lum() -> void:
             _avatar.scale = Vector3.ONE * 1.15
             _avatar.position = Vector3(0, -1.0, 0)
             _base_y = _avatar.position.y
+            _avatar_mode = "glb3d"
             return
     _avatar = _build_procedural_lum()
     _world_root.add_child(_avatar)
     _base_y = _avatar.position.y
+    _avatar_mode = "procedural3d"
 
 
 func _build_procedural_lum() -> Node3D:
@@ -223,11 +253,31 @@ func _material(color: Color, roughness: float, metallic: float) -> StandardMater
     return mat
 
 
+func avatar_mode() -> String:
+    return _avatar_mode
+
+
 func set_mood(mood: String) -> void:
     _mood = mood
+    if _avatar_mode == "puppet2d" and _puppet != null:
+        _puppet.set_mood(mood)
+
+
+func play_state(state: String) -> void:
+    if _avatar_mode == "puppet2d" and _puppet != null:
+        _puppet.play_state(state)
 
 
 func celebrate(critical := false) -> void:
+    if _avatar_mode == "puppet2d" and _puppet != null:
+        _puppet.play_state("victory")
+        var tw2d := create_tween()
+        tw2d.tween_property(_puppet, "scale", Vector2.ONE * _puppet.stage_scale() * (1.08 if critical else 1.04), 0.15)
+        tw2d.tween_property(_puppet, "scale", Vector2.ONE * _puppet.stage_scale(), 0.25)
+        tw2d.tween_interval(0.55)
+        tw2d.tween_callback(Callable(self, "_return_puppet_to_mood"))
+        return
+
     if _avatar == null:
         return
     var tw := create_tween()
@@ -236,7 +286,14 @@ func celebrate(critical := false) -> void:
     tw.tween_property(_avatar, "scale", Vector3.ONE, 0.28)
 
 
+func _return_puppet_to_mood() -> void:
+    if _puppet != null:
+        _puppet.set_mood(_mood)
+
+
 func _process(delta: float) -> void:
+    if _avatar_mode == "puppet2d":
+        return
     if _avatar == null:
         return
     _time += delta

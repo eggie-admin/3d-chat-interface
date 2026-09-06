@@ -1,0 +1,42 @@
+{
+  "schema": "kai9000.lum.puppet2d.v1",
+  "character": "Lum // Midnight 1996",
+  "engine": "Godot 4",
+  "rig_style": "original layered 2D parameter puppet inspired by general Live2D-style deformation principles",
+  "stage_origin": [360, 378],
+  "stage_scale": 0.36,
+  "parameters": [
+    "angle_x",
+    "angle_y",
+    "angle_z",
+    "body_sway",
+    "breath",
+    "eye_open",
+    "mouth_open",
+    "mouth_smile",
+    "hair_sway",
+    "tail_sway",
+    "wing_open"
+  ],
+  "layers": [
+    {"name": "hair_back", "group": "hair_back", "texture": "res://assets/lum/puppet/hair_back.png", "position": [0, 0], "z": 10},
+    {"name": "wings", "group": "wings", "texture": "res://assets/lum/puppet/wings.png", "position": [0, 0], "z": 20},
+    {"name": "tail", "group": "tail", "texture": "res://assets/lum/puppet/tail.png", "position": [0, 0], "z": 25},
+    {"name": "body", "group": "body", "texture": "res://assets/lum/puppet/body.png", "position": [0, 0], "z": 30},
+    {"name": "outfit", "group": "outfit", "texture": "res://assets/lum/puppet/outfit.png", "position": [0, 0], "z": 40},
+    {"name": "head", "group": "head", "texture": "res://assets/lum/puppet/head.png", "position": [0, 0], "z": 50},
+    {"name": "eyes_open", "group": "eyes", "texture": "res://assets/lum/puppet/eyes_open.png", "position": [0, 0], "z": 60},
+    {"name": "eyes_closed", "group": "eyes", "texture": "res://assets/lum/puppet/eyes_closed.png", "position": [0, 0], "z": 61},
+    {"name": "mouth_neutral", "group": "mouth", "texture": "res://assets/lum/puppet/mouth_neutral.png", "position": [0, 0], "z": 62},
+    {"name": "mouth_smile", "group": "mouth", "texture": "res://assets/lum/puppet/mouth_smile.png", "position": [0, 0], "z": 63},
+    {"name": "hair_front", "group": "hair_front", "texture": "res://assets/lum/puppet/hair_front.png", "position": [0, 0], "z": 70},
+    {"name": "horns", "group": "accessories", "texture": "res://assets/lum/puppet/horns.png", "position": [0, 0], "z": 80},
+    {"name": "accessories", "group": "accessories", "texture": "res://assets/lum/puppet/accessories.png", "position": [0, 0], "z": 90}
+  ],
+  "states": ["idle", "blink", "happy", "smug", "jealous", "angry", "sad", "cute", "cast", "hurt", "victory"],
+  "fallback_order": ["puppet2d", "glb3d", "procedural3d"],
+  "rights": {
+    "runtime_assets": "Lum-owned/generated or explicitly approved only",
+    "destiny_child": "reference-only motion taxonomy; no .pck, .moc, .mtn, extracted art, or extracted audio"
+  }
+}
