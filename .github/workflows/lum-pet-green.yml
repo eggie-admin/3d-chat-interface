@@ -11,6 +11,7 @@ on:
       - kai9000-s24fe-avatar-cockpit-20260906
       - kai9000-jrpg-dating-cathedral-20260906
       - kai9000-lum-puppet2d-green-20260906
+      - kai9000-ollama-termux-godot4-20260906
     paths:
       - 'pet/**'
       - '.github/workflows/lum-pet-green.yml'
@@ -50,6 +51,19 @@ jobs:
           test -f pet/godot/jrpg/project.godot
           test -f pet/godot/jrpg/Main.tscn
           test -f pet/godot/jrpg/JRPGCockpit.gd
+          test -f pet/godot/jrpg/OllamaTermuxBridge.gd
+          test -f pet/manifests/ollama-termux.reference.json
+          test -f pet/manifests/noko.reference.json
+          test -f pet/manifests/latest-apk-build.reference.json
+          test -f pet/godot/jrpg/addons/noko/LICENSE
+          test -f pet/godot/jrpg/addons/noko/plugin.cfg
+          test -f pet/godot/jrpg/addons/noko/plugin.gd
+          test -f pet/godot/jrpg/addons/noko/modules/NokoPrompt.gd
+          test -f pet/godot/jrpg/addons/noko/modules/NokoModel.gd
+          test -f pet/godot/jrpg/addons/noko/modules/NokoRunner.gd
+          test -f pet/godot/jrpg/addons/noko/modules/NokoBlobs.gd
+          test -f pet/godot/jrpg/addons/noko/modules/utils/NetUtils.gd
+          test -f pet/godot/jrpg/addons/noko/modules/utils/ValidatorUtils.gd
           test -f pet/godot/jrpg/LumAvatarStage.gd
           test -f pet/godot/jrpg/LumPuppet2D.gd
           test -f pet/godot/jrpg/assets/lum/puppet/lum_puppet.json
@@ -66,6 +80,29 @@ jobs:
           grep -q 'run/main_scene="res://Main.tscn"' pet/godot/jrpg/project.godot
           grep -q 'CathedralDirector="\*res://CathedralDirector.gd"' pet/godot/jrpg/project.godot
           grep -q 'DatingDirector="\*res://DatingDirector.gd"' pet/godot/jrpg/project.godot
+          grep -q 'OllamaTermuxBridge="\*res://OllamaTermuxBridge.gd"' pet/godot/jrpg/project.godot
+          grep -q 'res://addons/noko/plugin.cfg' pet/godot/jrpg/project.godot
+          grep -q 'NokoPromptAPI' pet/godot/jrpg/OllamaTermuxBridge.gd
+          grep -q 'NokoModelAPI' pet/godot/jrpg/OllamaTermuxBridge.gd
+          grep -q 'http://127.0.0.1:11434' pet/godot/jrpg/OllamaTermuxBridge.gd
+          grep -q '/api/tags' pet/godot/jrpg/OllamaTermuxBridge.gd
+          grep -q '/api/chat' pet/godot/jrpg/OllamaTermuxBridge.gd
+          grep -q 'qwen2.5:0.5b' pet/godot/jrpg/OllamaTermuxBridge.gd
+          grep -q 'DioNanos/ollama-termux' pet/manifests/ollama-termux.reference.json
+          grep -q '39d8bc2c7b123293703fbead08198c9efa9187b5' pet/manifests/ollama-termux.reference.json
+          grep -q 'eol_archived' pet/manifests/ollama-termux.reference.json
+          grep -q 'nthnn/noko' pet/manifests/noko.reference.json
+          grep -q 'a45373a5d28f7f8b5da1ec97eac65da95963e34e' pet/manifests/noko.reference.json
+          grep -q 'Copyright 2025 Nathanne Isip' pet/godot/jrpg/addons/noko/LICENSE
+          grep -q 'name="Noko"' pet/godot/jrpg/addons/noko/plugin.cfg
+          grep -q 'playtest/kai9000-webview-hotfix-install-20260908' pet/manifests/latest-apk-build.reference.json
+          grep -q 'e323a8e8d393c0bd73257e52e9435038efe99e12' pet/manifests/latest-apk-build.reference.json
+          grep -q 'art.eggiebagelface.kai9000.playtest' pet/manifests/latest-apk-build.reference.json
+          grep -q '1.0.1-playtest' pet/manifests/latest-apk-build.reference.json
+          grep -q '34185393478' pet/manifests/latest-apk-build.reference.json
+          grep -q '10040393800' pet/manifests/latest-apk-build.reference.json
+          grep -q 'b851af54f9e6a552e66659bfdda98cefbceaf9dc1680d1bfeacdf7ea1bb32cce' pet/manifests/latest-apk-build.reference.json
+          grep -q '"canonical_release": false' pet/manifests/latest-apk-build.reference.json
           grep -q 'http://127.0.0.1:8772' pet/godot/jrpg/JRPGCockpit.gd
           grep -q 'ACODEX // COMMAND MENU' pet/godot/jrpg/JRPGCockpit.gd
           grep -q 'res://assets/lum/lum.glb' pet/godot/jrpg/LumAvatarStage.gd
@@ -76,6 +113,7 @@ jobs:
           grep -q 'reference-only' pet/godot/jrpg/assets/lum/puppet/lum_puppet.json
           grep -q 'AudioStreamWAV' pet/godot/jrpg/OriginalFanfare.gd
           grep -q 'architectures/arm64-v8a=true' pet/godot/jrpg/export_presets.cfg
+          grep -q 'permissions/internet=true' pet/godot/jrpg/export_presets.cfg
           ! find pet/godot/jrpg/assets/lum/puppet -type f | grep -Ei '\.(pck|moc|mtn|moc3)$'
           ! grep -R -nE '0\.0\.0\.0|:22\b|OS\.execute|Process|Runtime\.exec' pet/godot/jrpg
 

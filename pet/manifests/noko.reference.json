@@ -1,0 +1,31 @@
+{
+  "schema": "kai9000.upstream-reference.v1",
+  "name": "noko",
+  "upstream": "nthnn/noko",
+  "upstream_commit": "a45373a5d28f7f8b5da1ec97eac65da95963e34e",
+  "license": "MIT",
+  "copyright": "Copyright 2025 Nathanne Isip",
+  "role": "godot4_ollama_plugin",
+  "integration": {
+    "mode": "vendored_and_kai_hardened",
+    "path": "pet/godot/jrpg/addons/noko",
+    "godot_minimum": "4.4",
+    "ollama_endpoint": "http://127.0.0.1:11434",
+    "runtime_adapter": "res://OllamaTermuxBridge.gd",
+    "provider_credentials_in_godot": false,
+    "arbitrary_shell": false,
+    "savepoint": "KAI9000_NOKO_GODOT4_INGEST_20260906"
+  },
+  "provenance": {
+    "plugin_metadata": "upstream",
+    "license": "upstream verbatim",
+    "runtime_modules": "derived from pinned upstream and modified under MIT"
+  },
+  "mutations": [
+    "preserve upstream MIT attribution",
+    "use application/json for Ollama JSON payloads",
+    "harden dictionary access and runner status handling",
+    "KAI adapter forces localhost HTTP and typed API calls",
+    "KAI adapter retains direct localhost fallback"
+  ]
+}

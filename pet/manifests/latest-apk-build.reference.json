@@ -1,0 +1,55 @@
+{
+  "schema": "kai9000.apk-build-reference.v1",
+  "captured_at": "2026-09-08T04:04:00Z",
+  "role": "latest_verified_playtest_apk_candidate",
+  "canonical_release": false,
+  "promotion_policy": "validation-only; do not merge or promote to canonical release without field evidence and Crown approval",
+  "source": {
+    "repo": "eggie-admin/vue-headless-cms",
+    "pull_request": 17,
+    "title": "KAI 9000 side-by-side WebView hotfix playtest",
+    "branch": "playtest/kai9000-webview-hotfix-install-20260908",
+    "head_sha": "e323a8e8d393c0bd73257e52e9435038efe99e12",
+    "base_branch": "release/kai9000-1.0.0",
+    "base_sha": "574f4f5ae70ce56eca986cd5fb3452aa434ab955"
+  },
+  "android_identity": {
+    "application_id": "art.eggiebagelface.kai9000.playtest",
+    "version_name": "1.0.1-playtest",
+    "version_code": 101,
+    "install_mode": "side-by-side validation"
+  },
+  "ci": {
+    "workflow": "android-debug-apk",
+    "run_id": 34185393478,
+    "run_number": 145,
+    "status": "completed",
+    "conclusion": "success",
+    "verified_steps": [
+      "Godot 4.7.2 editor and export templates",
+      "packaged jQuery cockpit",
+      "Godot Android v2 WebView plugin",
+      "full Cathedral architecture gate",
+      "Android export with ephemeral debug signing",
+      "Godot project import and validation",
+      "signed Android release-candidate APK export",
+      "APK identity, widget, WebView plugin, CMS assets, and 16 KiB alignment verification",
+      "private F-Droid staging input",
+      "artifact upload"
+    ]
+  },
+  "artifact": {
+    "id": 10040393800,
+    "name": "kai9000-donor-android-release-candidate",
+    "size_bytes": 59281058,
+    "digest": "sha256:b851af54f9e6a552e66659bfdda98cefbceaf9dc1680d1bfeacdf7ea1bb32cce",
+    "expires_at": "2026-09-22T04:03:51Z"
+  },
+  "integration": {
+    "godot_repo": "eggie-admin/3d-chat-interface",
+    "purpose": "Bind the current Godot/Noko/Ollama-Termux lane to the newest verified Samsung Android build state without treating a playtest package as canonical release.",
+    "noko": "ingested",
+    "ollama_termux": "reference-only pinned runtime",
+    "localhost_first": true
+  }
+}
