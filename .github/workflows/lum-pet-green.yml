@@ -54,6 +54,7 @@ jobs:
           test -f pet/godot/jrpg/OllamaTermuxBridge.gd
           test -f pet/manifests/ollama-termux.reference.json
           test -f pet/manifests/noko.reference.json
+          test -f pet/manifests/latest-apk-build.reference.json
           test -f pet/godot/jrpg/addons/noko/LICENSE
           test -f pet/godot/jrpg/addons/noko/plugin.cfg
           test -f pet/godot/jrpg/addons/noko/plugin.gd
@@ -94,6 +95,14 @@ jobs:
           grep -q 'a45373a5d28f7f8b5da1ec97eac65da95963e34e' pet/manifests/noko.reference.json
           grep -q 'Copyright 2025 Nathanne Isip' pet/godot/jrpg/addons/noko/LICENSE
           grep -q 'name="Noko"' pet/godot/jrpg/addons/noko/plugin.cfg
+          grep -q 'playtest/kai9000-webview-hotfix-install-20260908' pet/manifests/latest-apk-build.reference.json
+          grep -q 'e323a8e8d393c0bd73257e52e9435038efe99e12' pet/manifests/latest-apk-build.reference.json
+          grep -q 'art.eggiebagelface.kai9000.playtest' pet/manifests/latest-apk-build.reference.json
+          grep -q '1.0.1-playtest' pet/manifests/latest-apk-build.reference.json
+          grep -q '34185393478' pet/manifests/latest-apk-build.reference.json
+          grep -q '10040393800' pet/manifests/latest-apk-build.reference.json
+          grep -q 'b851af54f9e6a552e66659bfdda98cefbceaf9dc1680d1bfeacdf7ea1bb32cce' pet/manifests/latest-apk-build.reference.json
+          grep -q '"canonical_release": false' pet/manifests/latest-apk-build.reference.json
           grep -q 'http://127.0.0.1:8772' pet/godot/jrpg/JRPGCockpit.gd
           grep -q 'ACODEX // COMMAND MENU' pet/godot/jrpg/JRPGCockpit.gd
           grep -q 'res://assets/lum/lum.glb' pet/godot/jrpg/LumAvatarStage.gd
