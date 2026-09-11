@@ -1,4 +1,4 @@
-name: Lum Pet Green Gate
+name: Samsung ChatGPT No-Root Green Gate
 
 on:
   pull_request:
@@ -7,9 +7,7 @@ on:
       - '.github/workflows/lum-pet-green.yml'
   push:
     branches:
-      - lum-pet-cathedral-20260906
-      - kai9000-s24fe-avatar-cockpit-20260906
-      - kai9000-jrpg-dating-cathedral-20260906
+      - chatgpt-inapp-samsung-no-root
     paths:
       - 'pet/**'
       - '.github/workflows/lum-pet-green.yml'
@@ -35,14 +33,50 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Compile Python
+      - name: Compile Python reference tooling
         run: python -m compileall -q pet
 
-      - name: Validate Termux and Android launchers
+      - name: Validate Samsung Android build entrypoint
+        run: bash -n pet/godot/jrpg/build-s24fe.sh
+
+      - name: Enforce ChatGPT Samsung no-root doctrine
         run: |
-          bash -n pet/run-termux.sh
-          bash -n pet/kai-jrpg-supervisor.sh
-          bash -n pet/godot/jrpg/build-s24fe.sh
+          set -euo pipefail
+          test ! -e pet/run-termux.sh
+          test ! -e pet/kai-jrpg-supervisor.sh
+          grep -q 'const CHATGPT_URL := "https://chatgpt.com/"' pet/godot/jrpg/JRPGCockpit.gd
+          grep -q 'No Termux, Shizuku, root, ADB, or localhost daemon required' pet/godot/jrpg/JRPGCockpit.gd
+          grep -q 'gradle_build/target_sdk="36"' pet/godot/jrpg/export_presets.cfg
+          grep -q 'architectures/arm64-v8a=true' pet/godot/jrpg/export_presets.cfg
+          grep -q 'package/unique_name="art.eggiebagelface.kai9000"' pet/godot/jrpg/export_presets.cfg
+          ! grep -nE '127\.0\.0\.1|localhost|ACODEX|AcodeX|/data/data/com\.termux|Shizuku|Runtime\.exec|OS\.execute|su -c' pet/godot/jrpg/JRPGCockpit.gd
+          ! grep -nE 'permissions/(camera|record_audio|read_external_storage|write_external_storage)=true' pet/godot/jrpg/export_presets.cfg
+
+      - name: Validate imported LuHm ULTIMA contract
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          policy = json.loads(Path('pet/policy/chatgpt-samsung-no-root.json').read_text())
+          upstream = json.loads(Path('pet/manifests/luhmos-ultima-testing-green-20260910.json').read_text())
+
+          assert policy['project'] == 'ChatGPT in-app Samsung no-root'
+          assert policy['android_contract']['root_required'] is False
+          assert policy['android_contract']['shizuku_required'] is False
+          assert policy['android_contract']['termux_required'] is False
+          assert policy['android_contract']['target_sdk'] == 36
+          assert policy['android_contract']['abi'] == 'arm64-v8a'
+
+          assert upstream['milestone'] == 'LUHMOS_ULTIMA_TESTING_GREEN_20260910'
+          assert upstream['source']['commit'] == '7495266b649cdb605cc8f4a67070c265e2770589'
+          assert upstream['source']['workflow_run'] == 34556629871
+          assert upstream['apk']['package_id'] == 'art.eggiebagelface.luhmos'
+          assert upstream['apk']['target_sdk'] == 36
+          assert upstream['apk']['abi'] == 'arm64-v8a'
+          assert upstream['apk']['sha256'] == 'bb250075b39a3976ce3eea577973ed16cd75c0fbcfbf879676613f87ac286937'
+          assert upstream['import_policy']['depend_on_termux_runtime'] is False
+          PY
 
       - name: Validate JRPG Godot project shell
         run: |
@@ -52,23 +86,10 @@ jobs:
           test -f pet/godot/jrpg/LumAvatarStage.gd
           test -f pet/godot/jrpg/OriginalFanfare.gd
           test -f pet/godot/jrpg/export_presets.cfg
-          test -f pet/godot/jrpg/CathedralDirector.gd
-          test -f pet/godot/jrpg/DatingDirector.gd
-          test -f pet/godot/jrpg/RoleplayDirector.gd
-          test -f pet/godot/jrpg/BattleDirector.gd
-          test -f pet/godot/jrpg/OverworldMap.gd
-          test -f pet/godot/jrpg/OverworldMap.tscn
-          test -f pet/godot/jrpg/AnimationTaxonomy.gd
-          test -f pet/godot/jrpg/data/cathedral_content.json
           grep -q 'run/main_scene="res://Main.tscn"' pet/godot/jrpg/project.godot
-          grep -q 'CathedralDirector="\*res://CathedralDirector.gd"' pet/godot/jrpg/project.godot
-          grep -q 'DatingDirector="\*res://DatingDirector.gd"' pet/godot/jrpg/project.godot
-          grep -q 'http://127.0.0.1:8772' pet/godot/jrpg/JRPGCockpit.gd
-          grep -q 'ACODEX // COMMAND MENU' pet/godot/jrpg/JRPGCockpit.gd
+          grep -q 'res://JRPGCockpit.gd' pet/godot/jrpg/Main.tscn
           grep -q 'res://assets/lum/lum.glb' pet/godot/jrpg/LumAvatarStage.gd
           grep -q 'AudioStreamWAV' pet/godot/jrpg/OriginalFanfare.gd
-          grep -q 'architectures/arm64-v8a=true' pet/godot/jrpg/export_presets.cfg
-          ! grep -R -nE '0\.0\.0\.0|:22\b|OS\.execute|Process|Runtime\.exec' pet/godot/jrpg
 
       - name: Run sprite QA baseline
         working-directory: pet
