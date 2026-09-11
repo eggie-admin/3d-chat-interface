@@ -70,14 +70,14 @@ func _enemy_max_hp(monster: Dictionary) -> int:
     if str(monster.get("family", "")) == "boss":
         return 180
     var region := str(monster.get("region", ""))
-    var tier := {
+    var tier: int = int({
         "glass_coast": 34,
         "blue_steppe": 48,
         "ashen_canals": 62,
         "starfall_range": 82,
         "cathedral_of_static": 110,
-    }.get(region, 40)
-    return int(tier)
+    }.get(region, 40))
+    return tier
 
 func _rewards(monster: Dictionary) -> Dictionary:
     return {
