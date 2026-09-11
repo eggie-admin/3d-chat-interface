@@ -1,0 +1,61 @@
+{
+  "schema": "kai9000.chatgpt-samsung-no-root-seal.v1",
+  "milestone": "KAI9000_CHATGPT_SAMSUNG_NO_ROOT_GREEN_20260910",
+  "status": "GREEN_TESTING",
+  "canonical_branch": "chatgpt-inapp-samsung-no-root",
+  "verified_source_commit": "3b94382935a6e50a3aa711dba8be61688ab0718d",
+  "source_green": {
+    "workflow": ".github/workflows/lum-pet-green.yml",
+    "workflow_run": 34559764765,
+    "python_matrix": ["3.11", "3.12", "3.13"],
+    "result": "success"
+  },
+  "apk_green": {
+    "workflow": ".github/workflows/samsung-chatgpt-no-root-apk.yml",
+    "workflow_run": 34559920830,
+    "artifact_id": 10183983595,
+    "artifact_name": "kai9000-chatgpt-samsung-no-root-3",
+    "artifact_zip_digest": "sha256:91277baaa000f017c606e5557b6cc4c008b058d3351107382d1a7e972fea68e0",
+    "apk_name": "kai9000-chatgpt-samsung-no-root.apk",
+    "apk_sha256": "872907408ba410389b9f9b01eabdaf14ca2970bcf27561a115569a8992986653",
+    "package_id": "art.eggiebagelface.kai9000",
+    "application_label": "KAI 9000 ChatGPT Companion",
+    "version_name": "1.0.0",
+    "version_code": 100,
+    "min_sdk": 26,
+    "target_sdk": 36,
+    "abi": "arm64-v8a",
+    "signature_scheme": "v2",
+    "page_size_16k_alignment": "verified",
+    "permissions": ["android.permission.INTERNET"],
+    "camera_permission": false,
+    "microphone_permission": false,
+    "legacy_external_storage_permissions": false,
+    "signing": "ephemeral_testing_only"
+  },
+  "chatgpt_contract": {
+    "front_door": "official ChatGPT Android app",
+    "handoff": "user-visible Android link",
+    "patch_or_inject_chatgpt": false,
+    "root_required": false,
+    "shizuku_required": false,
+    "termux_required": false,
+    "adb_required": false,
+    "hidden_api_required": false,
+    "localhost_daemon_required": false
+  },
+  "upstream_luhmos": {
+    "milestone": "LUHMOS_ULTIMA_TESTING_GREEN_20260910",
+    "repository": "eggie-admin/hydra-shell-android",
+    "testing_commit": "7495266b649cdb605cc8f4a67070c265e2770589",
+    "workflow_run": 34556629871,
+    "package_id": "art.eggiebagelface.luhmos",
+    "apk_sha256": "bb250075b39a3976ce3eea577973ed16cd75c0fbcfbf879676613f87ac286937",
+    "relationship": "verified sibling artifact contract; not a runtime dependency"
+  },
+  "production_gate": {
+    "production_ready": false,
+    "persistent_release_signing_required": true,
+    "automatic_publish": false
+  }
+}
