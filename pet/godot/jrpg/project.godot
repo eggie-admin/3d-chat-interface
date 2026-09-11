@@ -23,6 +23,7 @@ window/energy_saving/keep_screen_on=true
 renderer/rendering_method="mobile"
 renderer/rendering_method.mobile="mobile"
 textures/default_filters/use_nearest_mipmap_filter=false
+textures/vram_compression/import_etc2_astc=true
 
 [gui]
 theme/default_font_multichannel_signed_distance_field=true
