@@ -1,37 +1,59 @@
-# Tiny Lum Pet Cathedral
+# KAI 9000 ChatGPT Samsung No-Root Companion
 
-Seal: `TINY_LUM_PET_CATHEDRAL_20260906`
+Canonical branch: `chatgpt-inapp-samsung-no-root`
 
-This subtree turns the existing Godot 4 local chat project into a local-first Tiny Lum Pet companion lane.
+Current integration seal: `LUHMOS_ULTIMA_TESTING_GREEN_20260910`
 
-## Source ingest
+This subtree is the Samsung Android companion lane for using the official ChatGPT app as the front door while preserving a strict no-root boundary.
 
-The supplied Google Drive archive is treated as a **reference corpus**, not a redistributable runtime dependency. Its notes describe music swaps, JP/KR voice swaps, OSTs, art swaps, wallpapers, fonts, and Android character-package replacement workflows. A comparison report also enumerates many `.pck` character assets.
+## Runtime doctrine
 
-No third-party game art, audio, voice, `.pck`, or archive bytes are committed here.
+- Official ChatGPT Android app / Android link resolver is the user-facing AI entry point.
+- Godot 4 provides the companion cockpit, local JRPG/pet UI, local save crystals, and authored visual/audio behavior.
+- Normal operation requires **no Termux, no Shizuku, no root, no ADB, no hidden APIs, no localhost daemon, and no cross-Knox process control**.
+- The companion never patches, injects into, impersonates, or controls the official ChatGPT app.
+- ChatGPT is opened only through an ordinary user-visible Android link action.
+- App-local save data lives under Godot `user://` storage and requires no broad storage permission.
 
-## Runtime
+## Android contract
 
-- Python stdlib service: `127.0.0.1:8772`
-- Godot bridge: `pet/godot/PetBridge.gd`
-- State endpoint: `GET /api/pet/state`
-- Event endpoint: `POST /api/pet/event`
-- Health: `GET /health`
-- Sprite contract: `pet/manifests/lumSpriteAtlas.schema.json`
+- Package: `art.eggiebagelface.kai9000`
+- Label: `KAI 9000 ChatGPT Companion`
+- Target SDK: 36
+- ABI: `arm64-v8a`
+- Internet permission only
+- Camera: disabled
+- Microphone: disabled
+- Legacy external storage permissions: disabled
 
-## Start
+## LuHm OS merge
+
+The LuHm OS ULTIMA testing milestone is imported as a verified sibling-artifact contract, not as a runtime dependency.
+
+- Source repo: `eggie-admin/hydra-shell-android`
+- Testing commit: `7495266b649cdb605cc8f4a67070c265e2770589`
+- Workflow run: `34556629871`
+- LuHm package: `art.eggiebagelface.luhmos`
+- LuHm version: `1.0.0` / code `100`
+- SDK 36 / ARM64 / 16 KB alignment gate: GREEN
+- Exact testing APK SHA-256: `bb250075b39a3976ce3eea577973ed16cd75c0fbcfbf879676613f87ac286937`
+- LuHm signing state: ephemeral testing signer only
+
+The companion intentionally keeps its own package identity so it can coexist with LuHm OS without Android signature/package collisions.
+
+## Build
 
 ```bash
-cd pet
-python3 server.py
+cd pet/godot/jrpg
+./build-s24fe.sh
 ```
 
-Then open `web/index.html` through the local server at `http://127.0.0.1:8772/`.
+The build produces:
 
-## Termux / KAI 9000 lane
+`build/kai9000-chatgpt-samsung-no-root.apk`
 
-This deliberately avoids current control-plane ports 5901, 6080, and 8767. Ordinary Termux owns the service; Secure Folder / WebView / AcodeX can act as the cockpit client.
+Production publication remains blocked until a persistent release signing identity and production gates are green.
 
-## Release rule
+## Source rights
 
-`legacy_external` and `unknown` sources are **reference-only**. Release builds may only ship assets explicitly classified as `lum_original` or `generated_original` with provenance.
+Reference-only third-party material must not be redistributed. Release builds may ship only assets explicitly classified as original/generated with recorded provenance.
