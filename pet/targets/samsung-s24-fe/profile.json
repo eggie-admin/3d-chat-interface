@@ -3,26 +3,33 @@
   "device_model": "SM-S721U1",
   "android_major": 16,
   "architecture": "aarch64",
-  "role": "KAI 9000 secure cockpit",
-  "runtime_owner": "ordinary-termux",
-  "secure_folder_role": "client-only",
-  "loopback_services": {
-    "vnc": 5901,
-    "websocket": 6080,
-    "acodex": 8767,
-    "jrpg_pet": 8772
+  "role": "KAI 9000 ChatGPT no-root companion",
+  "runtime_owner": "android-app-self",
+  "secure_folder_role": "optional-app-isolation",
+  "loopback_services": {},
+  "chatgpt_integration": {
+    "front_door": "official-chatgpt-android-app",
+    "handoff": "user-visible-android-link",
+    "url": "https://chatgpt.com/",
+    "app_injection": false,
+    "hidden_api": false
   },
   "godot": {
     "engine": "4.x",
     "renderer": "mobile",
     "design_resolution": [1280, 720],
-    "orientation": "landscape"
+    "orientation": "landscape",
+    "target_sdk": 36,
+    "abi": "arm64-v8a"
   },
   "security": {
-    "bind": "127.0.0.1",
-    "public_listeners": false,
+    "root_required": false,
+    "shizuku_required": false,
+    "termux_required": false,
+    "adb_required": false,
+    "localhost_daemon_required": false,
     "cross_knox_pid_control": false,
     "arbitrary_shell_endpoint": false,
-    "external_actions_default": "deny"
+    "external_actions_default": "user-confirmed"
   }
 }
