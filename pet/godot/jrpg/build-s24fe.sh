@@ -2,7 +2,7 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-OUT="$ROOT/build/kai9000-s24fe.apk"
+OUT="$ROOT/build/kai9000-chatgpt-samsung-no-root.apk"
 GODOT_BIN="${GODOT_BIN:-godot}"
 
 mkdir -p "$ROOT/build"
@@ -14,7 +14,7 @@ fi
 
 cd "$ROOT"
 "$GODOT_BIN" --headless --editor --path "$ROOT" --quit
-"$GODOT_BIN" --headless --path "$ROOT" --export-debug "Samsung S24 FE" "$OUT"
+"$GODOT_BIN" --headless --path "$ROOT" --export-debug "Samsung ChatGPT No Root" "$OUT"
 
 if [[ ! -s "$OUT" ]]; then
   echo "APK export failed: $OUT" >&2
