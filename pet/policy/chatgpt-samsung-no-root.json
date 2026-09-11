@@ -1,0 +1,33 @@
+{
+  "schema": "kai9000.chatgpt-samsung-no-root.v1",
+  "project": "ChatGPT in-app Samsung no-root",
+  "branch": "chatgpt-inapp-samsung-no-root",
+  "device_class": "Samsung Android 16 / SM-S721U1 compatible",
+  "front_door": "official ChatGPT Android app",
+  "companion_package": "art.eggiebagelface.kai9000",
+  "companion_label": "KAI 9000 ChatGPT Companion",
+  "android_contract": {
+    "target_sdk": 36,
+    "abi": "arm64-v8a",
+    "root_required": false,
+    "shizuku_required": false,
+    "termux_required": false,
+    "hidden_api_required": false,
+    "privileged_permissions_required": false,
+    "network_permission": true,
+    "camera_permission": false,
+    "microphone_permission": false,
+    "storage_permissions": false
+  },
+  "integration_rules": [
+    "Do not modify, hook, patch, inject into, or impersonate the official ChatGPT app.",
+    "Use ordinary Android app permissions and user-visible intents/shares only.",
+    "Treat LuHm OS as a separately signed sibling APK and verified upstream contract, not as an install-time package replacement.",
+    "No daemon, shell, ADB, root, Shizuku, Knox bypass, or hidden/system API may be required for normal operation.",
+    "Fail closed if an active runtime path introduces Termux-specific paths, su/root execution, Shizuku, or privileged Android permissions."
+  ],
+  "promotion": {
+    "automatic_publish": false,
+    "production_signing_required": true
+  }
+}
